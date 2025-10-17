@@ -5,6 +5,8 @@ import connectDB from "./config/db.js";
 import User from "./models/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
+import CategoryRoutes from './routes/categoryRoutes.js'
+import ProductRoutes from "./routes/productRoutes.js"
 // import authRoutes from "./routes/authRoutes.js";
 // import productRoutes from "./routes/productRoutes.js";
 // import categoryRoutes from "./routes/categoryRoutes.js";
@@ -165,6 +167,11 @@ app.post("/admin/signup", protectAdmin, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+// add category endpoint
+app.use('/api/category', CategoryRoutes);
+
+// add product endpoint
+app.use("/api/product", ProductRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () =>
